@@ -1,5 +1,5 @@
-import { apiClient } from "./apiClient";
-import type { components, paths } from "./types";
+import { apiClient } from './apiClient';
+import type { components, paths } from './types';
 
 /**
  * Users API Service
@@ -8,10 +8,10 @@ import type { components, paths } from "./types";
 
 // Type definitions
 type UpdateNotificationsEnabledRequest =
-  components["schemas"]["handlers.UpdateNotificationsEnabledRequest"];
+  components['schemas']['handlers.UpdateNotificationsEnabledRequest'];
 type UpdateTelegramChatIDRequest =
-  components["schemas"]["handlers.UpdateTelegramChatIDRequest"];
-type SuccessResponse = components["schemas"]["handlers.SuccessResponse"];
+  components['schemas']['handlers.UpdateTelegramChatIDRequest'];
+type SuccessResponse = components['schemas']['handlers.SuccessResponse'];
 
 /**
  * Update notifications enabled setting for the authenticated user
@@ -19,11 +19,11 @@ type SuccessResponse = components["schemas"]["handlers.SuccessResponse"];
  * @returns Success response
  */
 export const updateNotificationsEnabled = async (
-  data: UpdateNotificationsEnabledRequest
+  data: UpdateNotificationsEnabledRequest,
 ): Promise<SuccessResponse> => {
   const response = await apiClient.put<
-    paths["/users/notifications-enabled"]["put"]["responses"]["200"]["content"]["application/json"]
-  >("/users/notifications-enabled", data);
+    paths['/users/notifications-enabled']['put']['responses']['200']['content']['application/json']
+  >('/users/notifications-enabled', data);
 
   return response.data;
 };
@@ -34,11 +34,11 @@ export const updateNotificationsEnabled = async (
  * @returns Success response
  */
 export const updateTelegramChatID = async (
-  data: UpdateTelegramChatIDRequest
+  data: UpdateTelegramChatIDRequest,
 ): Promise<SuccessResponse> => {
   const response = await apiClient.put<
-    paths["/users/telegram-chat-id"]["put"]["responses"]["200"]["content"]["application/json"]
-  >("/users/telegram-chat-id", data);
+    paths['/users/telegram-chat-id']['put']['responses']['200']['content']['application/json']
+  >('/users/telegram-chat-id', data);
 
   return response.data;
 };

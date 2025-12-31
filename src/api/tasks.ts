@@ -1,5 +1,5 @@
-import { apiClient } from "./apiClient";
-import type { components, paths } from "./types";
+import { apiClient } from './apiClient';
+import type { components, paths } from './types';
 
 /**
  * Tasks API Service
@@ -7,11 +7,11 @@ import type { components, paths } from "./types";
  */
 
 // Type definitions
-type Task = components["schemas"]["models.Task"];
-type CreateTaskRequest = components["schemas"]["handlers.CreateTaskRequest"];
-type UpdateTaskRequest = components["schemas"]["handlers.UpdateTaskRequest"];
+type Task = components['schemas']['models.Task'];
+type CreateTaskRequest = components['schemas']['handlers.CreateTaskRequest'];
+type UpdateTaskRequest = components['schemas']['handlers.UpdateTaskRequest'];
 type PaginatedTasksResponse =
-  components["schemas"]["services.PaginatedTasksResponse"];
+  components['schemas']['services.PaginatedTasksResponse'];
 
 /**
  * Get all tasks with pagination and filters
@@ -21,19 +21,19 @@ type PaginatedTasksResponse =
 export const getTasks = async (params?: {
   page?: number;
   limit?: number;
-  type?: "casa" | "trabalho" | "lazer" | "saude";
+  type?: 'casa' | 'trabalho' | 'lazer' | 'saude';
   completed?: boolean;
   search?: string;
   due_date_from?: string;
   due_date_to?: string;
-  period?: "overdue" | "today" | "this_week" | "this_month";
+  period?: 'overdue' | 'today' | 'this_week' | 'this_month';
   assigned_by?: number;
-  sort_by?: "created_at" | "due_date" | "title";
-  order?: "asc" | "desc";
+  sort_by?: 'created_at' | 'due_date' | 'title';
+  order?: 'asc' | 'desc';
 }): Promise<PaginatedTasksResponse> => {
   const response = await apiClient.get<
-    paths["/tasks"]["get"]["responses"]["200"]["content"]["application/json"]
-  >("/tasks", { params });
+    paths['/tasks']['get']['responses']['200']['content']['application/json']
+  >('/tasks', { params });
 
   return response.data;
 };
@@ -45,7 +45,7 @@ export const getTasks = async (params?: {
  */
 export const getTask = async (id: number): Promise<Task> => {
   const response = await apiClient.get<
-    paths["/tasks/{id}"]["get"]["responses"]["200"]["content"]["application/json"]
+    paths['/tasks/{id}']['get']['responses']['200']['content']['application/json']
   >(`/tasks/${id}`);
 
   return response.data;
@@ -57,11 +57,11 @@ export const getTask = async (id: number): Promise<Task> => {
  * @returns Created task
  */
 export const createTask = async (
-  taskData: CreateTaskRequest
+  taskData: CreateTaskRequest,
 ): Promise<Task> => {
   const response = await apiClient.post<
-    paths["/tasks"]["post"]["responses"]["201"]["content"]["application/json"]
-  >("/tasks", taskData);
+    paths['/tasks']['post']['responses']['201']['content']['application/json']
+  >('/tasks', taskData);
 
   return response.data;
 };
@@ -74,10 +74,10 @@ export const createTask = async (
  */
 export const updateTask = async (
   id: number,
-  taskData: UpdateTaskRequest
+  taskData: UpdateTaskRequest,
 ): Promise<Task> => {
   const response = await apiClient.put<
-    paths["/tasks/{id}"]["put"]["responses"]["200"]["content"]["application/json"]
+    paths['/tasks/{id}']['put']['responses']['200']['content']['application/json']
   >(`/tasks/${id}`, taskData);
 
   return response.data;

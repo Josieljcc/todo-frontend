@@ -1,12 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
-import type { components } from "@/api";
-import { getStoredUser, isAuthenticated, login, logout, register } from "@/api";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router';
+import type { components } from '@/api';
+import { getStoredUser, isAuthenticated, login, logout, register } from '@/api';
 
-type LoginRequest = components["schemas"]["handlers.LoginRequest"];
-type RegisterRequest = components["schemas"]["handlers.RegisterRequest"];
-type AuthResponse = components["schemas"]["handlers.AuthResponse"];
-type User = components["schemas"]["models.User"];
+type LoginRequest = components['schemas']['handlers.LoginRequest'];
+type RegisterRequest = components['schemas']['handlers.RegisterRequest'];
+type AuthResponse = components['schemas']['handlers.AuthResponse'];
+type User = components['schemas']['models.User'];
 
 /**
  * Hook for user authentication
@@ -18,7 +18,7 @@ export const useAuth = () => {
 
   // Query to get current authenticated user
   const { data: user, isLoading: isLoadingUser } = useQuery<User | null>({
-    queryKey: ["auth", "user"],
+    queryKey: ['auth', 'user'],
     queryFn: () => {
       const storedUser = getStoredUser() as User | null;
       return storedUser;
@@ -33,13 +33,13 @@ export const useAuth = () => {
     onSuccess: (data: AuthResponse) => {
       // Update user query cache
       if (data.user) {
-        queryClient.setQueryData(["auth", "user"], data.user);
+        queryClient.setQueryData(['auth', 'user'], data.user);
       }
       // Navigate to tasks page
-      navigate("/tasks");
+      navigate('/tasks');
     },
     onError: (error) => {
-      console.error("Login error:", error);
+      console.error('Login error:', error);
     },
   });
 
@@ -49,13 +49,13 @@ export const useAuth = () => {
     onSuccess: (data: AuthResponse) => {
       // Update user query cache
       if (data.user) {
-        queryClient.setQueryData(["auth", "user"], data.user);
+        queryClient.setQueryData(['auth', 'user'], data.user);
       }
       // Navigate to home page
-      navigate("/tasks");
+      navigate('/tasks');
     },
     onError: (error) => {
-      console.error("Register error:", error);
+      console.error('Register error:', error);
     },
   });
 
@@ -69,9 +69,9 @@ export const useAuth = () => {
       // Clear all queries
       queryClient.clear();
       // Remove user from cache
-      queryClient.removeQueries({ queryKey: ["auth", "user"] });
+      queryClient.removeQueries({ queryKey: ['auth', 'user'] });
       // Navigate to login
-      navigate("/login");
+      navigate('/login');
     },
   });
 
@@ -97,7 +97,7 @@ export const useAuth = () => {
  */
 export const useIsAuthenticated = () => {
   return useQuery({
-    queryKey: ["auth", "isAuthenticated"],
+    queryKey: ['auth', 'isAuthenticated'],
     queryFn: () => isAuthenticated(),
     staleTime: Infinity,
   });
