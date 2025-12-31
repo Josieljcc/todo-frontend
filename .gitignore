@@ -17,3 +17,6 @@ dist/
 
 *storybook.log
 storybook-static
+
+# Generated/Downloaded files
+swagger.yaml
