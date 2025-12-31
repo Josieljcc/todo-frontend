@@ -1,5 +1,10 @@
-import type { components, paths } from "./types";
-import { apiClient, removeAuthToken, setAuthToken, setStoredUser } from "./apiClient";
+import {
+  apiClient,
+  removeAuthToken,
+  setAuthToken,
+  setStoredUser,
+} from './apiClient';
+import type { components, paths } from './types';
 
 /**
  * Auth API Service
@@ -7,10 +12,9 @@ import { apiClient, removeAuthToken, setAuthToken, setStoredUser } from "./apiCl
  */
 
 // Type definitions for auth requests and responses
-type LoginRequest = components["schemas"]["handlers.LoginRequest"];
-type RegisterRequest = components["schemas"]["handlers.RegisterRequest"];
-type AuthResponse = components["schemas"]["handlers.AuthResponse"];
-type ErrorResponse = components["schemas"]["handlers.ErrorResponse"];
+type LoginRequest = components['schemas']['handlers.LoginRequest'];
+type RegisterRequest = components['schemas']['handlers.RegisterRequest'];
+type AuthResponse = components['schemas']['handlers.AuthResponse'];
 
 /**
  * Login user
@@ -21,11 +25,11 @@ export const login = async (
   credentials: LoginRequest,
 ): Promise<AuthResponse> => {
   const response = await apiClient.post<
-    paths["/auth/login"]["post"]["responses"]["200"]["content"]["application/json"]
-  >("/auth/login", credentials);
+    paths['/auth/login']['post']['responses']['200']['content']['application/json']
+  >('/auth/login', credentials);
 
   const data = response.data;
-  
+
   // Store token and user data
   if (data.token) {
     setAuthToken(data.token);
@@ -46,11 +50,11 @@ export const register = async (
   userData: RegisterRequest,
 ): Promise<AuthResponse> => {
   const response = await apiClient.post<
-    paths["/auth/register"]["post"]["responses"]["201"]["content"]["application/json"]
-  >("/auth/register", userData);
+    paths['/auth/register']['post']['responses']['201']['content']['application/json']
+  >('/auth/register', userData);
 
   const data = response.data;
-  
+
   // Store token and user data
   if (data.token) {
     setAuthToken(data.token);
@@ -75,5 +79,5 @@ export const logout = (): void => {
  * @returns true if token exists in storage
  */
 export const isAuthenticated = (): boolean => {
-  return !!localStorage.getItem("auth_token");
+  return !!localStorage.getItem('auth_token');
 };

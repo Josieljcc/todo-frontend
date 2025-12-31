@@ -1,1 +1,1 @@
-export { AppRoutes } from "./appRoutes.tsx";
+export { AppRoutes } from './appRoutes.tsx';

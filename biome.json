@@ -22,8 +22,12 @@
   },
   "css": {
     "parser": {
-      "cssModules": true
+      "cssModules": true,
+      "tailwindDirectives": true
     }
+  },
+  "files": {
+    "ignore": ["src/stories/**"]
   },
   "linter": {
     "enabled": true,

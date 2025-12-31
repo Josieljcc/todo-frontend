@@ -1,16 +1,15 @@
-import type { ReactNode } from "react";
 
 export interface LoadingProps {
   /**
    * Loading variant
    * @default "spinner"
    */
-  variant?: "spinner" | "skeleton" | "overlay";
+  variant?: 'spinner' | 'skeleton' | 'overlay';
   /**
    * Size of the loading indicator
    * @default "md"
    */
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
   /**
    * Custom message to display
    */
@@ -23,14 +22,14 @@ export interface LoadingProps {
 }
 
 const sizeStyles = {
-  sm: "h-4 w-4",
-  md: "h-8 w-8",
-  lg: "h-12 w-12",
+  sm: 'h-4 w-4',
+  md: 'h-8 w-8',
+  lg: 'h-12 w-12',
 };
 
 export const Loading = ({
-  variant = "spinner",
-  size = "md",
+  variant = 'spinner',
+  size = 'md',
   message,
   fullScreen = false,
 }: LoadingProps) => {
@@ -65,7 +64,7 @@ export const Loading = ({
     </div>
   );
 
-  if (variant === "overlay" || fullScreen) {
+  if (variant === 'overlay' || fullScreen) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-75">
         <div className="flex flex-col items-center gap-4">
@@ -76,7 +75,7 @@ export const Loading = ({
     );
   }
 
-  if (variant === "skeleton") {
+  if (variant === 'skeleton') {
     return (
       <div className="w-full">
         <Skeleton />

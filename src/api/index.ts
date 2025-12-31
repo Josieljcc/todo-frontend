@@ -2,30 +2,28 @@
  * API Types
  * Auto-generated from OpenAPI specification
  */
-export type * from "./types";
-
-/**
- * Re-export commonly used types for convenience
- */
-export type { paths, components } from "./types";
 
 /**
  * API Client
  */
 export {
-  apiClient,
   API_BASE_URL,
+  apiClient,
   getAuthToken,
-  setAuthToken,
-  removeAuthToken,
   getStoredUser,
+  removeAuthToken,
+  setAuthToken,
   setStoredUser,
-} from "./apiClient";
-
+} from './apiClient';
 /**
  * API Services
  */
-export * from "./auth";
-export * from "./tasks";
-export * from "./comments";
-export * from "./users";
+export * from './auth';
+export * from './comments';
+export * from './tasks';
+export type * from './types';
+/**
+ * Re-export commonly used types for convenience
+ */
+export type { components, paths } from './types';
+export * from './users';
