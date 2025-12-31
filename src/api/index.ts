@@ -7,7 +7,4 @@ export type * from "./types";
 /**
  * Re-export commonly used types for convenience
  */
-export type {
-  paths,
-  components,
-} from "./types";
+export type { paths, components } from "./types";
