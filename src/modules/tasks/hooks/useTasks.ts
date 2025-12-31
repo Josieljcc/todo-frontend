@@ -1,12 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { components } from '@/api';
-import {
-  createTask,
-  deleteTask,
-  getTask,
-  getTasks,
-  updateTask,
-} from '@/api/tasks';
+import { createTask, deleteTask, getTasks, updateTask } from '@/api/tasks';
 
 type Task = components['schemas']['models.Task'];
 type CreateTaskRequest = components['schemas']['handlers.CreateTaskRequest'];

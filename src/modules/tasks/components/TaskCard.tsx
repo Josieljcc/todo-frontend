@@ -1,4 +1,5 @@
 import { Calendar, CheckCircle2, Circle, Tag, User } from 'lucide-react';
+import { useNavigate } from 'react-router';
 import type { components } from '@/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -35,6 +36,8 @@ export const TaskCard = ({
   onDelete,
   isLoading = false,
 }: TaskCardProps) => {
+  const navigate = useNavigate();
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('pt-BR', {
@@ -46,13 +49,26 @@ export const TaskCard = ({
 
   const isOverdue = !task.completed && new Date(task.due_date) < new Date();
 
+  const handleCardClick = () => {
+    navigate(`/tasks/${task.id}`);
+  };
+
   return (
     <Card
       className={cn(
-        'transition-all hover:shadow-md',
+        'transition-all hover:shadow-md cursor-pointer',
         task.completed && 'opacity-60',
         isOverdue && !task.completed && 'border-red-300',
       )}
+      onClick={handleCardClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+      role="button"
+      tabIndex={0}
     >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-2">
@@ -66,7 +82,10 @@ export const TaskCard = ({
           </CardTitle>
           <button
             type="button"
-            onClick={() => onToggleComplete?.(task, !task.completed)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleComplete?.(task, !task.completed);
+            }}
             disabled={isLoading}
             className="mt-1 flex-shrink-0"
             aria-label={
@@ -110,11 +129,20 @@ export const TaskCard = ({
           )}
 
           {task.tags && task.tags.length > 0 && (
-            <div className="flex items-center gap-1">
-              <Tag className="h-3 w-3" />
-              <span className="text-xs text-muted-foreground">
-                {task.tags.length} tag{task.tags.length > 1 ? 's' : ''}
-              </span>
+            <div className="flex flex-wrap items-center gap-1">
+              {task.tags.map((tag) => (
+                <span
+                  key={tag.id}
+                  className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium"
+                  style={{
+                    backgroundColor: `${tag.color}20`,
+                    color: tag.color,
+                    border: `1px solid ${tag.color}40`,
+                  }}
+                >
+                  {tag.name}
+                </span>
+              ))}
             </div>
           )}
         </div>
@@ -140,7 +168,7 @@ export const TaskCard = ({
         </div>
 
         {(onEdit || onDelete) && (
-          <div className="flex gap-2 pt-2">
+          <div className="flex gap-2 pt-2" onClick={(e) => e.stopPropagation()}>
             {onEdit && (
               <Button
                 variant="outline"

@@ -1,8 +1,9 @@
-import { Route, Routes, Navigate } from 'react-router';
-import { AuthPage } from '../modules/auth/pages';
-import { TasksPage } from '../modules/tasks/pages';
-import { AppLayout } from '../layouts';
+import { Navigate, Route, Routes } from 'react-router';
 import { ProtectedRoute } from '../components/ProtectedRoute';
+import { AppLayout } from '../layouts';
+import { AuthPage } from '../modules/auth/pages';
+import { SettingsPage } from '../modules/settings/pages';
+import { TaskDetailPage, TasksPage } from '../modules/tasks/pages';
 
 export function AppRoutes() {
   return (
@@ -14,6 +15,26 @@ export function AppRoutes() {
           <ProtectedRoute>
             <AppLayout>
               <TasksPage />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tasks/:id"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <TaskDetailPage />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <SettingsPage />
             </AppLayout>
           </ProtectedRoute>
         }

@@ -11,12 +11,14 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useTags } from '../hooks/useTags';
 import {
-  createTaskSchema,
   type CreateTaskFormData,
+  createTaskSchema,
   type UpdateTaskFormData,
   updateTaskSchema,
 } from '../schemas/taskSchemas';
+import { TagSelector } from './TagSelector';
 
 interface TaskFormProps {
   onSubmit: (data: CreateTaskFormData | UpdateTaskFormData) => void;
@@ -35,11 +37,14 @@ export const TaskForm = ({
 }: TaskFormProps) => {
   const isEditMode = !!initialData;
   const schema = isEditMode ? updateTaskSchema : createTaskSchema;
+  const { tags, isLoadingTags } = useTags();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    setValue,
   } = useForm<CreateTaskFormData | UpdateTaskFormData>({
     resolver: zodResolver(schema),
     defaultValues: initialData
@@ -67,6 +72,8 @@ export const TaskForm = ({
     };
     onSubmit(formattedData);
   };
+
+  const selectedTagIds = watch('tag_ids') || [];
 
   return (
     <Card>
@@ -168,6 +175,22 @@ export const TaskForm = ({
               <p className="text-sm text-destructive" role="alert">
                 {errors.due_date.message}
               </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label>Tags</Label>
+            {isLoadingTags ? (
+              <div className="text-sm text-muted-foreground">
+                Carregando tags...
+              </div>
+            ) : (
+              <TagSelector
+                tags={tags}
+                selectedTagIds={selectedTagIds}
+                onSelectionChange={(tagIds) => setValue('tag_ids', tagIds)}
+                isLoading={isLoading}
+              />
             )}
           </div>
 

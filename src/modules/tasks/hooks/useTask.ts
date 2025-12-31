@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTask } from '@/api/tasks';
 import type { components } from '@/api';
+import { getTask } from '@/api/tasks';
 
 type Task = components['schemas']['models.Task'];
 

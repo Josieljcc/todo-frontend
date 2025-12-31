@@ -1,4 +1,7 @@
-import { LogOut, User, Mail } from 'lucide-react';
+import { LogOut, Mail, Settings, User } from 'lucide-react';
+import { useNavigate } from 'react-router';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,9 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
 import { useAuth } from '@/modules/auth/hooks/useAuth';
-import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ interface AppLayoutProps {
 
 export const AppLayout = ({ children }: AppLayoutProps) => {
   const { user, logout, isLoggingOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background">
@@ -52,6 +54,13 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() => navigate('/settings')}
+                    className="cursor-pointer"
+                  >
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Configurações</span>
+                  </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => logout()}
                     disabled={isLoggingOut}

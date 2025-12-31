@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from './components/Toaster';
 import { AppRoutes } from './routes';
 
 const App = () => {
@@ -6,6 +7,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AppRoutes />
+      <Toaster />
     </QueryClientProvider>
   );
 };

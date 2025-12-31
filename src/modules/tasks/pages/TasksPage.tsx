@@ -1,15 +1,15 @@
-import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import type { components } from '@/api';
 import { Loading } from '@/components';
-import { TaskCard, TaskForm, TaskFilters } from '../components';
+import { Button } from '@/components/ui/button';
+import { TaskCard, TaskFilters, TaskForm } from '../components';
 import { useTasks } from '../hooks/useTasks';
-import type { TaskFilters as TaskFiltersType } from '../schemas/taskSchemas';
 import type {
   CreateTaskFormData,
+  TaskFilters as TaskFiltersType,
   UpdateTaskFormData,
 } from '../schemas/taskSchemas';
-import type { components } from '@/api';
 
 type Task = components['schemas']['models.Task'];
 
