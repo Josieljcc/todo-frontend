@@ -1,14 +1,14 @@
 export type { ButtonProps } from './button';
 export { Button, buttonVariants } from './button';
-export { Input } from './input';
-export type { InputProps } from './input';
-export { Label } from './label';
 export {
   Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
   CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from './card';
-export { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs';
+export type { InputProps } from './input';
+export { Input } from './input';
+export { Label } from './label';
+export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';

@@ -1,8 +1,7 @@
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AlertCircle } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Card,
   CardContent,
@@ -10,9 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '../hooks/useAuth';
-import { registerSchema, type RegisterFormData } from '../schemas/authSchemas';
-import { AlertCircle } from 'lucide-react';
+import { type RegisterFormData, registerSchema } from '../schemas/authSchemas';
 
 export const RegisterForm = () => {
   const { register: registerUser, isRegistering, registerError } = useAuth();
