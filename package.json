@@ -1,0 +1,39 @@
+{
+  "name": "rsbuild-project",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rsbuild build",
+    "check": "biome check --write",
+    "dev": "rsbuild dev --open",
+    "format": "biome format --write",
+    "preview": "rsbuild preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "generate:types": "openapi-typescript https://api-todo.infoos.shop/swagger.json -o src/api/types.ts"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tanstack/react-query": "^5.90.16",
+    "axios": "^1.13.2",
+    "postcss": "^8.5.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router": "^7.11.0",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.8",
+    "@rsbuild/core": "^1.6.14",
+    "@rsbuild/plugin-react": "^1.4.2",
+    "@storybook/addon-docs": "^10.1.11",
+    "@tanstack/eslint-plugin-query": "^5.91.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "openapi-typescript": "^7.10.1",
+    "storybook": "^10.1.11",
+    "storybook-react-rsbuild": "^3.2.0",
+    "typescript": "^5.9.3"
+  }
+}
