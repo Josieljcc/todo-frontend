@@ -27,7 +27,7 @@
     }
   },
   "files": {
-    "ignore": ["src/stories/**"]
+    "ignoreUnknown": true
   },
   "linter": {
     "enabled": true,
