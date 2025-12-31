@@ -1,5 +1,5 @@
-import { apiClient } from './apiClient';
-import type { components, paths } from './types';
+import { apiClient } from "./apiClient";
+import type { components, paths } from "./types";
 
 /**
  * Comments API Service
@@ -7,11 +7,11 @@ import type { components, paths } from './types';
  */
 
 // Type definitions
-type Comment = components['schemas']['models.Comment'];
+type Comment = components["schemas"]["models.Comment"];
 type CreateCommentRequest =
-  components['schemas']['handlers.CreateCommentRequest'];
+  components["schemas"]["handlers.CreateCommentRequest"];
 type UpdateCommentRequest =
-  components['schemas']['handlers.UpdateCommentRequest'];
+  components["schemas"]["handlers.UpdateCommentRequest"];
 
 /**
  * Get comments for a specific task
@@ -20,7 +20,7 @@ type UpdateCommentRequest =
  */
 export const getTaskComments = async (taskId: number): Promise<Comment[]> => {
   const response = await apiClient.get<
-    paths['/tasks/{id}/comments']['get']['responses']['200']['content']['application/json']
+    paths["/tasks/{id}/comments"]["get"]["responses"]["200"]["content"]["application/json"]
   >(`/tasks/${taskId}/comments`);
 
   return response.data;
@@ -32,11 +32,11 @@ export const getTaskComments = async (taskId: number): Promise<Comment[]> => {
  * @returns Created comment
  */
 export const createComment = async (
-  commentData: CreateCommentRequest,
+  commentData: CreateCommentRequest
 ): Promise<Comment> => {
   const response = await apiClient.post<
-    paths['/comments']['post']['responses']['201']['content']['application/json']
-  >('/comments', commentData);
+    paths["/comments"]["post"]["responses"]["201"]["content"]["application/json"]
+  >("/comments", commentData);
 
   return response.data;
 };
@@ -49,10 +49,10 @@ export const createComment = async (
  */
 export const updateComment = async (
   id: number,
-  commentData: UpdateCommentRequest,
+  commentData: UpdateCommentRequest
 ): Promise<Comment> => {
   const response = await apiClient.put<
-    paths['/comments/{id}']['put']['responses']['200']['content']['application/json']
+    paths["/comments/{id}"]["put"]["responses"]["200"]["content"]["application/json"]
   >(`/comments/${id}`, commentData);
 
   return response.data;

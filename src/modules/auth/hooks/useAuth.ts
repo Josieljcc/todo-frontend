@@ -35,7 +35,7 @@ export const useAuth = () => {
       if (data.user) {
         queryClient.setQueryData(["auth", "user"], data.user);
       }
-      // Navigate to home page
+      // Navigate to tasks page
       navigate("/tasks");
     },
     onError: (error) => {

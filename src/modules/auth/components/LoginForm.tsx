@@ -30,6 +30,7 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginFormData) => {
+    console.log(data);
     login(data);
   };
 

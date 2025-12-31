@@ -2,4 +2,4 @@
  * Utility functions
  */
 
-export * from './validators';
+export * from "./validators";

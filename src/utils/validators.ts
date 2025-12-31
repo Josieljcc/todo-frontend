@@ -14,7 +14,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * @returns true if email is valid, false otherwise
  */
 export const validateEmail = (email: string): boolean => {
-  if (!email || typeof email !== 'string') {
+  if (!email || typeof email !== "string") {
     return false;
   }
   return EMAIL_REGEX.test(email.trim());
@@ -27,7 +27,7 @@ export const validateEmail = (email: string): boolean => {
  * @returns true if password meets requirements, false otherwise
  */
 export const validatePassword = (password: string, minLength = 6): boolean => {
-  if (!password || typeof password !== 'string') {
+  if (!password || typeof password !== "string") {
     return false;
   }
   return password.length >= minLength;
@@ -42,7 +42,7 @@ export const validateRequired = (value: unknown): boolean => {
   if (value === null || value === undefined) {
     return false;
   }
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     return value.trim().length > 0;
   }
   if (Array.isArray(value)) {
@@ -59,7 +59,7 @@ export const validateRequired = (value: unknown): boolean => {
  */
 export const validatePasswordMatch = (
   password: string,
-  confirmPassword: string,
+  confirmPassword: string
 ): boolean => {
   if (!password || !confirmPassword) {
     return false;
@@ -77,9 +77,9 @@ export const validatePasswordMatch = (
 export const validateUsername = (
   username: string,
   minLength = 3,
-  maxLength = 50,
+  maxLength = 50
 ): boolean => {
-  if (!username || typeof username !== 'string') {
+  if (!username || typeof username !== "string") {
     return false;
   }
   const trimmed = username.trim();
@@ -96,9 +96,9 @@ export const validateUsername = (
 export const validateLength = (
   value: string,
   minLength?: number,
-  maxLength?: number,
+  maxLength?: number
 ): boolean => {
-  if (!value || typeof value !== 'string') {
+  if (!value || typeof value !== "string") {
     return false;
   }
   const length = value.trim().length;
@@ -118,10 +118,10 @@ export const validateLength = (
  */
 export const getEmailError = (email: string): string | null => {
   if (!email) {
-    return 'Email is required';
+    return "Email is required";
   }
   if (!validateEmail(email)) {
-    return 'Please enter a valid email address';
+    return "Please enter a valid email address";
   }
   return null;
 };
@@ -134,10 +134,10 @@ export const getEmailError = (email: string): string | null => {
  */
 export const getPasswordError = (
   password: string,
-  minLength = 6,
+  minLength = 6
 ): string | null => {
   if (!password) {
-    return 'Password is required';
+    return "Password is required";
   }
   if (!validatePassword(password, minLength)) {
     return `Password must be at least ${minLength} characters long`;
@@ -153,7 +153,7 @@ export const getPasswordError = (
  */
 export const getRequiredError = (
   value: unknown,
-  fieldName = 'Field',
+  fieldName = "Field"
 ): string | null => {
   if (!validateRequired(value)) {
     return `${fieldName} is required`;
@@ -169,13 +169,13 @@ export const getRequiredError = (
  */
 export const getPasswordMatchError = (
   password: string,
-  confirmPassword: string,
+  confirmPassword: string
 ): string | null => {
   if (!confirmPassword) {
-    return 'Please confirm your password';
+    return "Please confirm your password";
   }
   if (!validatePasswordMatch(password, confirmPassword)) {
-    return 'Passwords do not match';
+    return "Passwords do not match";
   }
   return null;
 };

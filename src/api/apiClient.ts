@@ -2,21 +2,26 @@ import axios, {
   type AxiosError,
   type AxiosInstance,
   type InternalAxiosRequestConfig,
-} from 'axios';
+} from "axios";
 
 /**
  * API Client configuration
  * Base URL is loaded from environment variables
  */
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || 'https://api-todo.infoos.shop';
+  import.meta.env.VITE_API_URL || "https://api-todo.infoos.shop/api/v1";
+
+// Log for debugging (remove in production)
+if (import.meta.env.DEV) {
+  console.log("API Base URL:", API_BASE_URL);
+}
 
 /**
  * Storage keys for authentication
  */
 const STORAGE_KEYS = {
-  TOKEN: 'auth_token',
-  USER: 'auth_user',
+  TOKEN: "auth_token",
+  USER: "auth_user",
 } as const;
 
 /**
@@ -63,7 +68,7 @@ const createApiClient = (): AxiosInstance => {
   const client = axios.create({
     baseURL: API_BASE_URL,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     timeout: 30000, // 30 seconds
   });
@@ -79,7 +84,7 @@ const createApiClient = (): AxiosInstance => {
     },
     (error) => {
       return Promise.reject(error);
-    },
+    }
   );
 
   // Response interceptor: Handle errors globally
@@ -92,19 +97,19 @@ const createApiClient = (): AxiosInstance => {
       if (error.response?.status === 401) {
         removeAuthToken();
         // Only redirect if not already on login page
-        if (window.location.pathname !== '/login') {
-          window.location.href = '/login';
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
         }
       }
 
       // Handle 403 Forbidden
       if (error.response?.status === 403) {
         // Could show a toast notification here
-        console.error('Access forbidden');
+        console.error("Access forbidden");
       }
 
       return Promise.reject(error);
-    },
+    }
   );
 
   return client;
