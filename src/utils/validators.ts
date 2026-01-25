@@ -57,10 +57,7 @@ export const validateRequired = (value: unknown): boolean => {
  * @param confirmPassword - Confirmation password
  * @returns true if passwords match, false otherwise
  */
-export const validatePasswordMatch = (
-  password: string,
-  confirmPassword: string,
-): boolean => {
+export const validatePasswordMatch = (password: string, confirmPassword: string): boolean => {
   if (!password || !confirmPassword) {
     return false;
   }
@@ -74,11 +71,7 @@ export const validatePasswordMatch = (
  * @param maxLength - Maximum username length (default: 50)
  * @returns true if username is valid, false otherwise
  */
-export const validateUsername = (
-  username: string,
-  minLength = 3,
-  maxLength = 50,
-): boolean => {
+export const validateUsername = (username: string, minLength = 3, maxLength = 50): boolean => {
   if (!username || typeof username !== 'string') {
     return false;
   }
@@ -93,11 +86,7 @@ export const validateUsername = (
  * @param maxLength - Maximum length
  * @returns true if string length is within range, false otherwise
  */
-export const validateLength = (
-  value: string,
-  minLength?: number,
-  maxLength?: number,
-): boolean => {
+export const validateLength = (value: string, minLength?: number, maxLength?: number): boolean => {
   if (!value || typeof value !== 'string') {
     return false;
   }
@@ -132,10 +121,7 @@ export const getEmailError = (email: string): string | null => {
  * @param minLength - Minimum password length (default: 6)
  * @returns Error message or null if valid
  */
-export const getPasswordError = (
-  password: string,
-  minLength = 6,
-): string | null => {
+export const getPasswordError = (password: string, minLength = 6): string | null => {
   if (!password) {
     return 'Password is required';
   }
@@ -151,10 +137,7 @@ export const getPasswordError = (
  * @param fieldName - Name of the field (for error message)
  * @returns Error message or null if valid
  */
-export const getRequiredError = (
-  value: unknown,
-  fieldName = 'Field',
-): string | null => {
+export const getRequiredError = (value: unknown, fieldName = 'Field'): string | null => {
   if (!validateRequired(value)) {
     return `${fieldName} is required`;
   }
@@ -167,10 +150,7 @@ export const getRequiredError = (
  * @param confirmPassword - Confirmation password
  * @returns Error message or null if valid
  */
-export const getPasswordMatchError = (
-  password: string,
-  confirmPassword: string,
-): string | null => {
+export const getPasswordMatchError = (password: string, confirmPassword: string): string | null => {
   if (!confirmPassword) {
     return 'Please confirm your password';
   }
