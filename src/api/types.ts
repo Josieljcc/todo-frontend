@@ -1039,6 +1039,93 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/tasks/assigned': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List tasks assigned by user
+     * @description Retrieves paginated tasks that were created/assigned by the authenticated user to other users. This allows users to follow tasks they created for others.
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number (default: 1) */
+          page?: number;
+          /** @description Items per page (default: 10, max: 100) */
+          limit?: number;
+          /** @description Filter by task type (casa, trabalho, lazer, saude) */
+          type?: string;
+          /** @description Filter by completion status */
+          completed?: boolean;
+          /** @description Search in title and description */
+          search?: string;
+          /** @description Filter tasks with due date from (ISO 8601 format) */
+          due_date_from?: string;
+          /** @description Filter tasks with due date to (ISO 8601 format) */
+          due_date_to?: string;
+          /** @description Filter by period (overdue, today, this_week, this_month) */
+          period?: string;
+          /** @description Sort field (created_at, due_date, title) */
+          sort_by?: string;
+          /** @description Sort order (asc, desc) */
+          order?: string;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['services.PaginatedTasksResponse'];
+          };
+        };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['handlers.ErrorResponse'];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['handlers.ErrorResponse'];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['handlers.ErrorResponse'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/tasks/{id}': {
     parameters: {
       query?: never;
@@ -1351,6 +1438,77 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/users': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List users
+     * @description Retrieves a paginated list of all users in the system. Returns only public information (id, username, email) for use in task assignment.
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number (default: 1) */
+          page?: number;
+          /** @description Items per page (default: 10, max: 100) */
+          limit?: number;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['handlers.PaginatedUsersResponse'];
+          };
+        };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['handlers.ErrorResponse'];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['handlers.ErrorResponse'];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['handlers.ErrorResponse'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/users/notifications-enabled': {
     parameters: {
       query?: never;
@@ -1560,6 +1718,13 @@ export interface components {
        * @example johndoe
        */
       username: string;
+    };
+    'handlers.PaginatedUsersResponse': {
+      limit: number;
+      page: number;
+      total: number;
+      total_pages: number;
+      users: components['schemas']['models.User'][];
     };
     'handlers.RegisterRequest': {
       /** @example john@example.com */
