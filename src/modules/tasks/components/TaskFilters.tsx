@@ -3,20 +3,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import type { TaskFilters } from '../schemas/taskSchemas';
+import type { TaskFilters as TaskFiltersType } from '../schemas/taskSchemas';
 
 interface TaskFiltersProps {
-  filters: TaskFilters;
-  onFiltersChange: (filters: TaskFilters) => void;
+  filters: TaskFiltersType;
+  onFiltersChange: (filters: TaskFiltersType) => void;
   onReset: () => void;
 }
 
-export const TaskFilters = ({
-  filters,
-  onFiltersChange,
-  onReset,
-}: TaskFiltersProps) => {
-  const handleFilterChange = (key: keyof TaskFilters, value: unknown) => {
+export const TaskFilters = ({ filters, onFiltersChange, onReset }: TaskFiltersProps) => {
+  const handleFilterChange = (key: keyof TaskFiltersType, value: unknown) => {
     onFiltersChange({
       ...filters,
       [key]: value,
@@ -51,9 +47,7 @@ export const TaskFilters = ({
                 onChange={(e) =>
                   handleFilterChange(
                     'type',
-                    e.target.value
-                      ? (e.target.value as TaskFilters['type'])
-                      : undefined,
+                    e.target.value ? (e.target.value as TaskFiltersType['type']) : undefined
                   )
                 }
               >
@@ -70,19 +64,11 @@ export const TaskFilters = ({
               <select
                 id="completed"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                value={
-                  filters.completed === undefined
-                    ? ''
-                    : filters.completed
-                      ? 'true'
-                      : 'false'
-                }
+                value={filters.completed === undefined ? '' : filters.completed ? 'true' : 'false'}
                 onChange={(e) =>
                   handleFilterChange(
                     'completed',
-                    e.target.value === ''
-                      ? undefined
-                      : e.target.value === 'true',
+                    e.target.value === '' ? undefined : e.target.value === 'true'
                   )
                 }
               >
@@ -103,9 +89,7 @@ export const TaskFilters = ({
                 onChange={(e) =>
                   handleFilterChange(
                     'period',
-                    e.target.value
-                      ? (e.target.value as TaskFilters['period'])
-                      : undefined,
+                    e.target.value ? (e.target.value as TaskFiltersType['period']) : undefined
                   )
                 }
               >
@@ -126,9 +110,7 @@ export const TaskFilters = ({
                 onChange={(e) =>
                   handleFilterChange(
                     'sort_by',
-                    e.target.value
-                      ? (e.target.value as TaskFilters['sort_by'])
-                      : undefined,
+                    e.target.value ? (e.target.value as TaskFiltersType['sort_by']) : undefined
                   )
                 }
               >
@@ -141,12 +123,7 @@ export const TaskFilters = ({
           </div>
 
           <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onReset}
-              className="flex-1"
-            >
+            <Button type="button" variant="outline" onClick={onReset} className="flex-1">
               Limpar Filtros
             </Button>
           </div>

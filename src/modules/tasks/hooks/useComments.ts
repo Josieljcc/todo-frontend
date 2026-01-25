@@ -1,17 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { components } from '@/api';
-import {
-  createComment,
-  deleteComment,
-  getTaskComments,
-  updateComment,
-} from '@/api/comments';
+import { createComment, deleteComment, getTaskComments, updateComment } from '@/api/comments';
 
 type Comment = components['schemas']['models.Comment'];
-type CreateCommentRequest =
-  components['schemas']['handlers.CreateCommentRequest'];
-type UpdateCommentRequest =
-  components['schemas']['handlers.UpdateCommentRequest'];
+type CreateCommentRequest = components['schemas']['handlers.CreateCommentRequest'];
+type UpdateCommentRequest = components['schemas']['handlers.UpdateCommentRequest'];
 
 /**
  * Hook for managing comments on a task
@@ -27,11 +20,7 @@ export const useComments = (taskId: number) => {
   });
 
   // Create comment mutation
-  const createCommentMutation = useMutation<
-    Comment,
-    Error,
-    CreateCommentRequest
-  >({
+  const createCommentMutation = useMutation<Comment, Error, CreateCommentRequest>({
     mutationFn: (commentData) => createComment(commentData),
     onSuccess: () => {
       // Invalidate and refetch comments

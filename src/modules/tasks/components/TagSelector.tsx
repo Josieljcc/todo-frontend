@@ -1,6 +1,8 @@
+import { motion } from 'framer-motion';
 import type { components } from '@/api';
-import { TagBadge } from './TagBadge';
+import { getVariants, staggerContainer } from '@/lib/animations';
 import { cn } from '@/lib/utils';
+import { TagBadge } from './TagBadge';
 
 type Tag = components['schemas']['models.Tag'];
 
@@ -34,28 +36,32 @@ export const TagSelector = ({
   }
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <motion.div
+      className="flex flex-wrap gap-2"
+      initial="hidden"
+      animate="visible"
+      variants={getVariants(staggerContainer)}
+    >
       {tags.map((tag) => {
         const isSelected = selectedTagIds.includes(tag.id);
         return (
-          <button
+          <motion.button
             key={tag.id}
             type="button"
             onClick={() => handleTagToggle(tag.id)}
             disabled={isLoading}
-            className={cn(
-              'transition-all',
-              isSelected && 'ring-2 ring-primary ring-offset-2',
-            )}
+            className={cn('transition-all', isSelected && 'ring-2 ring-primary ring-offset-2')}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial="hidden"
+            animate="visible"
+            variants={getVariants(staggerContainer)}
+            layout
           >
-            <TagBadge
-              tag={tag}
-              variant={isSelected ? 'default' : 'outline'}
-              size="sm"
-            />
-          </button>
+            <TagBadge tag={tag} variant={isSelected ? 'default' : 'outline'} size="sm" />
+          </motion.button>
         );
       })}
-    </div>
+    </motion.div>
   );
 };

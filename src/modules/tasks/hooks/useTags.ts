@@ -28,11 +28,7 @@ export const useTags = () => {
   });
 
   // Update tag mutation
-  const updateTagMutation = useMutation<
-    Tag,
-    Error,
-    { id: number; data: UpdateTagRequest }
-  >({
+  const updateTagMutation = useMutation<Tag, Error, { id: number; data: UpdateTagRequest }>({
     mutationFn: ({ id, data }) => updateTag(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tags'] });

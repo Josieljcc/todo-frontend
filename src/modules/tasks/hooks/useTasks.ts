@@ -46,11 +46,7 @@ export const useTasks = (params?: TasksQueryParams) => {
   });
 
   // Update task mutation
-  const updateTaskMutation = useMutation<
-    Task,
-    Error,
-    { id: number; data: UpdateTaskRequest }
-  >({
+  const updateTaskMutation = useMutation<Task, Error, { id: number; data: UpdateTaskRequest }>({
     mutationFn: ({ id, data }) => updateTask(id, data),
     onSuccess: (data) => {
       // Invalidate tasks list and update single task cache
@@ -69,27 +65,25 @@ export const useTasks = (params?: TasksQueryParams) => {
   });
 
   // Toggle task completion mutation (optimistic update)
-  const toggleTaskCompletionMutation = useMutation<
-    Task,
-    Error,
-    { task: Task; completed: boolean }
-  >({
-    mutationFn: async ({ task, completed }) => {
-      return updateTask(task.id, {
-        title: task.title,
-        description: task.description,
-        type: task.type,
-        priority: task.priority,
-        due_date: task.due_date,
-        completed,
-        tag_ids: task.tags?.map((tag) => tag.id) ?? [],
-      });
-    },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-      queryClient.setQueryData(['tasks', data.id], data);
-    },
-  });
+  const toggleTaskCompletionMutation = useMutation<Task, Error, { task: Task; completed: boolean }>(
+    {
+      mutationFn: async ({ task, completed }) => {
+        return updateTask(task.id, {
+          title: task.title,
+          description: task.description,
+          type: task.type,
+          priority: task.priority,
+          due_date: task.due_date,
+          completed,
+          tag_ids: task.tags?.map((tag) => tag.id) ?? [],
+        });
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ['tasks'] });
+        queryClient.setQueryData(['tasks', data.id], data);
+      },
+    }
+  );
 
   return {
     // Queries

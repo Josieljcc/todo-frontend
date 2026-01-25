@@ -1,8 +1,12 @@
 export { CommentCard } from './CommentCard';
 export { CommentForm } from './CommentForm';
 export { CommentList } from './CommentList';
+export { InProgressCard } from './InProgressCard';
 export { TagBadge } from './TagBadge';
 export { TagSelector } from './TagSelector';
-export { TaskCard } from './TaskCard';
+export { TaskCard } from './TaskCard/TaskCard';
 export { TaskFilters } from './TaskFilters';
-export { TaskForm } from './TaskForm';
+export { TaskForm } from './TaskForm/TaskForm';
+export { TaskFormBottomSheet } from './TaskFormBottomSheet';
+export { TaskFormModal } from './TaskFormModal';
+export { TaskFormOverlay } from './TaskFormOverlay';
