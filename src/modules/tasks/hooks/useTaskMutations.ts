@@ -36,4 +36,3 @@ export const useTaskMutations = () => {
     updateTaskError: updateTaskMutation.error,
   };
 };
-

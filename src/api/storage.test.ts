@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { clearLocalStorage } from '@/test/utils';
 import {
   getAuthToken,
@@ -147,7 +147,7 @@ describe('storage', () => {
       const invalidUser = {
         id: 1,
         // Missing required fields
-      } as any;
+      } as unknown as Parameters<typeof setStoredUser>[0];
 
       expect(() => setStoredUser(invalidUser)).toThrow('Invalid user data format');
     });

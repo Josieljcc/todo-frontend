@@ -19,4 +19,3 @@ export const TaskFormOverlay = () => {
 
   return isMobile ? <TaskFormBottomSheet /> : <TaskFormModal />;
 };
-

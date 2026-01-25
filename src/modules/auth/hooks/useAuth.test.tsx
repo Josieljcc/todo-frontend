@@ -133,7 +133,11 @@ describe('useAuth', () => {
 
       const { result } = renderHook(() => useAuth(), { wrapper });
 
-      const payload = { username: 'newuser', email: 'newuser@example.com', password: 'password123' };
+      const payload = {
+        username: 'newuser',
+        email: 'newuser@example.com',
+        password: 'password123',
+      };
       result.current.register(payload as any);
 
       await waitFor(() => {
@@ -161,4 +165,3 @@ describe('useAuth', () => {
     });
   });
 });
-

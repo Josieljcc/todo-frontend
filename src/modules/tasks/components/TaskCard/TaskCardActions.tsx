@@ -94,16 +94,7 @@ export const TaskCardActions = ({
         )}
       </AnimatePresence>
 
-      <div
-        className="flex items-center justify-end px-6 py-2.5 flex-shrink-0 border-t border-border/30"
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.stopPropagation();
-          }
-        }}
-        role="group"
-      >
+      <div className="flex items-center justify-end px-6 py-2.5 flex-shrink-0 border-t border-border/30">
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger asChild>
             <button

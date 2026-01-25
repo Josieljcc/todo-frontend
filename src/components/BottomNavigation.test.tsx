@@ -75,7 +75,8 @@ describe('BottomNavigation', () => {
     render(<BottomNavigation />);
 
     const addButtons = screen.getAllByRole('button', { name: /add task/i });
-    const mobileAddButton = addButtons.find((b) => b.className.includes('rounded-full')) ?? addButtons[0];
+    const mobileAddButton =
+      addButtons.find((b) => b.className.includes('rounded-full')) ?? addButtons[0];
 
     const addButton = mobileAddButton;
     await user.click(addButton);
@@ -94,7 +95,8 @@ describe('BottomNavigation', () => {
     render(<BottomNavigation />);
 
     const addButtons = screen.getAllByRole('button', { name: /add task/i });
-    const desktopAddButton = addButtons.find((b) => b.className.includes('h-14 w-14')) ?? addButtons[0];
+    const desktopAddButton =
+      addButtons.find((b) => b.className.includes('h-14 w-14')) ?? addButtons[0];
 
     const addButton = desktopAddButton;
     await user.click(addButton);
@@ -108,7 +110,8 @@ describe('BottomNavigation', () => {
     render(<BottomNavigation />);
 
     const addButtons = screen.getAllByRole('button', { name: /add task/i });
-    const mobileAddButton = addButtons.find((b) => b.className.includes('rounded-full')) ?? addButtons[0];
+    const mobileAddButton =
+      addButtons.find((b) => b.className.includes('rounded-full')) ?? addButtons[0];
 
     expect(mobileAddButton).toBeDisabled();
   });

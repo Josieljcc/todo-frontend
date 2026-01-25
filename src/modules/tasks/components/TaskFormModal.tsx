@@ -1,8 +1,8 @@
 import { Modal } from '@/components/Modal';
 import { useTaskForm } from '@/contexts/TaskFormContext';
 import { useErrorHandler } from '@/hooks/useErrorHandler';
-import type { CreateTaskFormData, UpdateTaskFormData } from '../schemas/taskSchemas';
 import { useTaskMutations } from '../hooks/useTaskMutations';
+import type { CreateTaskFormData, UpdateTaskFormData } from '../schemas/taskSchemas';
 import { TaskForm } from './TaskForm/TaskForm';
 
 export const TaskFormModal = () => {
@@ -16,14 +16,14 @@ export const TaskFormModal = () => {
 
   const initialData: UpdateTaskFormData | undefined = editingTask
     ? {
-      title: editingTask.title,
-      description: editingTask.description,
-      type: editingTask.type,
-      priority: editingTask.priority,
-      due_date: editingTask.due_date,
-      completed: editingTask.completed,
-      tag_ids: editingTask.tags?.map((tag) => tag.id) ?? [],
-    }
+        title: editingTask.title,
+        description: editingTask.description,
+        type: editingTask.type,
+        priority: editingTask.priority,
+        due_date: editingTask.due_date,
+        completed: editingTask.completed,
+        tag_ids: editingTask.tags?.map((tag) => tag.id) ?? [],
+      }
     : undefined;
 
   const handleSubmit = (data: CreateTaskFormData | UpdateTaskFormData) => {
@@ -56,4 +56,3 @@ export const TaskFormModal = () => {
     </Modal>
   );
 };
-

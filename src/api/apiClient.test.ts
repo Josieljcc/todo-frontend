@@ -1,7 +1,7 @@
 import axios, { type AxiosError } from 'axios';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { navigateTo } from '@/lib/navigation';
-import { getAuthToken, removeAuthToken, setAuthToken } from './storage';
+import { getAuthToken, removeAuthToken } from './storage';
 
 // Mock dependencies
 vi.mock('./storage', () => ({
@@ -145,7 +145,7 @@ describe('apiClient', () => {
 
     try {
       await responseInterceptor.onRejected(mockError);
-    } catch (error) {
+    } catch (_error) {
       // Expected to reject
     }
 
@@ -174,7 +174,7 @@ describe('apiClient', () => {
 
     try {
       await responseInterceptor.onRejected(mockError);
-    } catch (error) {
+    } catch (_error) {
       // Expected to reject
     }
 
@@ -193,7 +193,7 @@ describe('apiClient', () => {
 
     try {
       await responseInterceptor.onRejected(mockError);
-    } catch (error) {
+    } catch (_error) {
       // Expected to reject
     }
 
