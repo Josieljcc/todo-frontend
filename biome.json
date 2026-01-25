@@ -13,11 +13,16 @@
     "useIgnoreFile": true
   },
   "formatter": {
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single"
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "es5"
     }
   },
   "css": {
@@ -32,7 +37,39 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "warn",
+        "useExhaustiveDependencies": "warn"
+      },
+      "suspicious": {
+        "noRedeclare": "error",
+        "noExplicitAny": "warn"
+      },
+      "style": {
+        "noParameterAssign": "warn",
+        "useConst": "error",
+        "useImportType": "error"
+      },
+      "complexity": {
+        "noExcessiveLinesPerFunction": {
+          "level": "warn",
+          "options": {
+            "maxLines": 50,
+            "skipBlankLines": false
+          }
+        },
+        "noExcessiveNestedTestSuites": "warn"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "warn",
+        "useKeyWithClickEvents": "warn",
+        "useKeyWithMouseEvents": "warn"
+      },
+      "performance": {
+        "noDelete": "warn"
+      }
     }
   }
 }
