@@ -17,9 +17,9 @@ type UpdateTagRequest = components['schemas']['handlers.UpdateTagRequest'];
  */
 export const getTags = async (): Promise<Tag[]> => {
   const response =
-    await apiClient.get<
-      paths['/tags']['get']['responses']['200']['content']['application/json']
-    >('/tags');
+    await apiClient.get<paths['/tags']['get']['responses']['200']['content']['application/json']>(
+      '/tags'
+    );
 
   return response.data;
 };
@@ -56,10 +56,7 @@ export const createTag = async (tagData: CreateTagRequest): Promise<Tag> => {
  * @param tagData - Tag update data
  * @returns Updated tag
  */
-export const updateTag = async (
-  id: number,
-  tagData: UpdateTagRequest,
-): Promise<Tag> => {
+export const updateTag = async (id: number, tagData: UpdateTagRequest): Promise<Tag> => {
   const response = await apiClient.put<
     paths['/tags/{id}']['put']['responses']['200']['content']['application/json']
   >(`/tags/${id}`, tagData);

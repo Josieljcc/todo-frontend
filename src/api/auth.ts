@@ -1,9 +1,4 @@
-import {
-  apiClient,
-  removeAuthToken,
-  setAuthToken,
-  setStoredUser,
-} from './apiClient';
+import { apiClient, removeAuthToken, setAuthToken, setStoredUser } from './apiClient';
 import type { components, paths } from './types';
 
 /**
@@ -21,9 +16,7 @@ type AuthResponse = components['schemas']['handlers.AuthResponse'];
  * @param credentials - Username/email and password
  * @returns Auth response with token and user data
  */
-export const login = async (
-  credentials: LoginRequest,
-): Promise<AuthResponse> => {
+export const login = async (credentials: LoginRequest): Promise<AuthResponse> => {
   const response = await apiClient.post<
     paths['/auth/login']['post']['responses']['200']['content']['application/json']
   >('/auth/login', credentials);
@@ -46,9 +39,7 @@ export const login = async (
  * @param userData - User registration data
  * @returns Auth response with token and user data
  */
-export const register = async (
-  userData: RegisterRequest,
-): Promise<AuthResponse> => {
+export const register = async (userData: RegisterRequest): Promise<AuthResponse> => {
   const response = await apiClient.post<
     paths['/auth/register']['post']['responses']['201']['content']['application/json']
   >('/auth/register', userData);

@@ -10,8 +10,7 @@ import type { components, paths } from './types';
 type Task = components['schemas']['models.Task'];
 type CreateTaskRequest = components['schemas']['handlers.CreateTaskRequest'];
 type UpdateTaskRequest = components['schemas']['handlers.UpdateTaskRequest'];
-type PaginatedTasksResponse =
-  components['schemas']['services.PaginatedTasksResponse'];
+type PaginatedTasksResponse = components['schemas']['services.PaginatedTasksResponse'];
 
 /**
  * Get all tasks with pagination and filters
@@ -56,9 +55,7 @@ export const getTask = async (id: number): Promise<Task> => {
  * @param taskData - Task creation data
  * @returns Created task
  */
-export const createTask = async (
-  taskData: CreateTaskRequest,
-): Promise<Task> => {
+export const createTask = async (taskData: CreateTaskRequest): Promise<Task> => {
   const response = await apiClient.post<
     paths['/tasks']['post']['responses']['201']['content']['application/json']
   >('/tasks', taskData);
@@ -72,13 +69,34 @@ export const createTask = async (
  * @param taskData - Task update data
  * @returns Updated task
  */
-export const updateTask = async (
-  id: number,
-  taskData: UpdateTaskRequest,
-): Promise<Task> => {
+export const updateTask = async (id: number, taskData: UpdateTaskRequest): Promise<Task> => {
   const response = await apiClient.put<
     paths['/tasks/{id}']['put']['responses']['200']['content']['application/json']
   >(`/tasks/${id}`, taskData);
+
+  return response.data;
+};
+
+/**
+ * Get tasks assigned by the authenticated user to other users
+ * @param params - Query parameters
+ * @returns Paginated tasks response
+ */
+export const getAssignedTasks = async (params?: {
+  page?: number;
+  limit?: number;
+  type?: 'casa' | 'trabalho' | 'lazer' | 'saude';
+  completed?: boolean;
+  search?: string;
+  due_date_from?: string;
+  due_date_to?: string;
+  period?: 'overdue' | 'today' | 'this_week' | 'this_month';
+  sort_by?: 'created_at' | 'due_date' | 'title';
+  order?: 'asc' | 'desc';
+}): Promise<PaginatedTasksResponse> => {
+  const response = await apiClient.get<
+    paths['/tasks/assigned']['get']['responses']['200']['content']['application/json']
+  >('/tasks/assigned', { params });
 
   return response.data;
 };

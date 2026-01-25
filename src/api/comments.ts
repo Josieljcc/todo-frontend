@@ -8,10 +8,8 @@ import type { components, paths } from './types';
 
 // Type definitions
 type Comment = components['schemas']['models.Comment'];
-type CreateCommentRequest =
-  components['schemas']['handlers.CreateCommentRequest'];
-type UpdateCommentRequest =
-  components['schemas']['handlers.UpdateCommentRequest'];
+type CreateCommentRequest = components['schemas']['handlers.CreateCommentRequest'];
+type UpdateCommentRequest = components['schemas']['handlers.UpdateCommentRequest'];
 
 /**
  * Get comments for a specific task
@@ -27,13 +25,24 @@ export const getTaskComments = async (taskId: number): Promise<Comment[]> => {
 };
 
 /**
+ * Get a comment by ID
+ * @param id - Comment ID
+ * @returns Comment data
+ */
+export const getComment = async (id: number): Promise<Comment> => {
+  const response = await apiClient.get<
+    paths['/comments/{id}']['get']['responses']['200']['content']['application/json']
+  >(`/comments/${id}`);
+
+  return response.data;
+};
+
+/**
  * Create a new comment on a task
  * @param commentData - Comment creation data
  * @returns Created comment
  */
-export const createComment = async (
-  commentData: CreateCommentRequest,
-): Promise<Comment> => {
+export const createComment = async (commentData: CreateCommentRequest): Promise<Comment> => {
   const response = await apiClient.post<
     paths['/comments']['post']['responses']['201']['content']['application/json']
   >('/comments', commentData);
@@ -49,7 +58,7 @@ export const createComment = async (
  */
 export const updateComment = async (
   id: number,
-  commentData: UpdateCommentRequest,
+  commentData: UpdateCommentRequest
 ): Promise<Comment> => {
   const response = await apiClient.put<
     paths['/comments/{id}']['put']['responses']['200']['content']['application/json']
