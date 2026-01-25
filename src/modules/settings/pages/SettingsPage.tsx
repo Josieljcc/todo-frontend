@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/modules/auth/hooks/useAuth';
@@ -14,18 +8,12 @@ import { useSettings } from '../hooks/useSettings';
 
 export const SettingsPage = () => {
   const { user } = useAuth();
-  const {
-    updateNotifications,
-    updateTelegramChatId,
-    isUpdatingNotifications,
-    isUpdatingTelegram,
-  } = useSettings();
+  const { updateNotifications, updateTelegramChatId, isUpdatingNotifications, isUpdatingTelegram } =
+    useSettings();
 
-  const [telegramChatId, setTelegramChatId] = useState(
-    user?.telegram_chat_id || '',
-  );
+  const [telegramChatId, setTelegramChatId] = useState(user?.telegram_chat_id || '');
   const [notificationsEnabled, setNotificationsEnabled] = useState(
-    user?.notifications_enabled ?? false,
+    user?.notifications_enabled ?? false
   );
 
   const handleNotificationsToggle = () => {
@@ -42,9 +30,7 @@ export const SettingsPage = () => {
     <div className="container mx-auto py-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Configurações</h1>
-        <p className="text-muted-foreground">
-          Gerencie suas preferências e configurações de conta
-        </p>
+        <p className="text-muted-foreground">Gerencie suas preferências e configurações de conta</p>
       </div>
 
       <Card>
@@ -55,12 +41,7 @@ export const SettingsPage = () => {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="username">Nome de Usuário</Label>
-            <Input
-              id="username"
-              value={user?.username || ''}
-              disabled
-              className="bg-muted"
-            />
+            <Input id="username" value={user?.username || ''} disabled className="bg-muted" />
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
@@ -78,9 +59,7 @@ export const SettingsPage = () => {
       <Card>
         <CardHeader>
           <CardTitle>Notificações</CardTitle>
-          <CardDescription>
-            Configure suas preferências de notificações
-          </CardDescription>
+          <CardDescription>Configure suas preferências de notificações</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
@@ -130,8 +109,7 @@ export const SettingsPage = () => {
               onChange={(e) => setTelegramChatId(e.target.value)}
             />
             <p className="text-sm text-muted-foreground">
-              Envie uma mensagem para o bot do Telegram primeiro para obter seu
-              chat ID
+              Envie uma mensagem para o bot do Telegram primeiro para obter seu chat ID
             </p>
           </div>
           <Button onClick={handleTelegramSave} disabled={isUpdatingTelegram}>

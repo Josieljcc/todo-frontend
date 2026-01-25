@@ -4,8 +4,7 @@ import { updateNotificationsEnabled, updateTelegramChatID } from '@/api/users';
 
 type UpdateNotificationsRequest =
   components['schemas']['handlers.UpdateNotificationsEnabledRequest'];
-type UpdateTelegramRequest =
-  components['schemas']['handlers.UpdateTelegramChatIDRequest'];
+type UpdateTelegramRequest = components['schemas']['handlers.UpdateTelegramChatIDRequest'];
 type SuccessResponse = components['schemas']['handlers.SuccessResponse'];
 
 /**
@@ -27,11 +26,7 @@ export const useSettings = () => {
   });
 
   // Update Telegram chat ID mutation
-  const updateTelegramMutation = useMutation<
-    SuccessResponse,
-    Error,
-    UpdateTelegramRequest
-  >({
+  const updateTelegramMutation = useMutation<SuccessResponse, Error, UpdateTelegramRequest>({
     mutationFn: (data) => updateTelegramChatID(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['auth', 'user'] });
