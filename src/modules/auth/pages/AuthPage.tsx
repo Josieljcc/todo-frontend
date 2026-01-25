@@ -1,11 +1,23 @@
+import { motion } from 'framer-motion';
+import { Logo } from '@/components';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LoginForm } from '../components/LoginForm';
-import { RegisterForm } from '../components/RegisterForm';
+import { getVariants, scaleIn } from '@/lib/animations';
+import { LoginForm } from '../components/LoginForm/LoginForm';
+import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 
 export const AuthPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md">
+      <motion.div
+        className="w-full max-w-md"
+        initial="hidden"
+        animate="visible"
+        variants={getVariants(scaleIn)}
+      >
+        <div className="flex flex-col items-center mb-8">
+          <Logo size={80} />
+          <h1 className="text-2xl font-bold mt-4">Todo App</h1>
+        </div>
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Login</TabsTrigger>
@@ -18,7 +30,7 @@ export const AuthPage = () => {
             <RegisterForm />
           </TabsContent>
         </Tabs>
-      </div>
+      </motion.div>
     </div>
   );
 };
